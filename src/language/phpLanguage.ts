@@ -9,7 +9,13 @@ export const phpLanguage: Language = {
     const text = node.text
     const match = text.match(/^(\/\*\*[\s*]*)([\s\S]*)(\n[\s]*\*\/)/)
     if (!match) throw new Error(`Could not match ${text}`)
-    return new RegExp(match[2].replace(/@(Given |When |Then )/, '').trim())
+    return new RegExp(
+      match[2]
+        .replace(/@(Given |When |Then )/, '')
+        .replace(/\?P<[^>]+>/g, '') // removes ?P<var> variable capturing groups
+        .replace(/\(\?-?i\)/g, '') // removes (?i) and (?-i) ignore case groups
+        .trim()
+    )
   },
   // Empty array because Behat does not support Cucumber Expressions
   defineParameterTypeQueries: [],
