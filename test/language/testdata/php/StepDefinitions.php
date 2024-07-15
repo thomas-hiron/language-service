@@ -19,4 +19,12 @@ class StepDefinitions
     {
         // Given
     }
+
+    /**
+     * @Given ^I capture a "(?P<var_name>[^"]+)"$
+     */
+    public function capture_var_name()
+    {
+        // Given
+    }
 }
